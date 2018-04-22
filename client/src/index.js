@@ -22,3 +22,33 @@ if (module.hot) {
     render(App);
   });
 }
+
+// TO REMOVE... THE STUFF BELOW THIS LINE IS ONLY FOR BEFORE WE MOVE TO REACT
+
+/* eslint-disable */
+$('.slider').on('input change', function onChange(e) {
+  const sliderValue = e.target.value;
+  // Find the span for holding the slider value
+  const valuesText = $(this)
+    .parent()
+    .parent()
+    .find('.slider-value');
+
+  valuesText.text(sliderValue);
+});
+
+function getInitialValues() {
+  $('.slider-group').each(function addValues() {
+    const sliderValue = $(this)
+      .find('.slider')
+      .val();
+    $(this)
+      .find('.slider-value')
+      .text(sliderValue);
+  });
+}
+
+$(document).ready(() => {
+  getInitialValues();
+});
+/* eslint-enable */

@@ -2,14 +2,13 @@ const express = require('express');
 
 const router = express.Router();
 
-const locations = [
-  {
+const locations = [{
     address: '4345 Nobel Dr',
     bedrooms: 3,
     bathrooms: 3,
     walkability: 85,
     safety: 70,
-    price: 2900,
+    price: '$2900',
   },
   {
     address: '3435 Lebon Dr',
@@ -17,7 +16,7 @@ const locations = [
     bathrooms: 2,
     walkability: 55,
     safety: 80,
-    price: 2600,
+    price: '$2600',
   },
   {
     address: '9336 Easter Way',
@@ -25,7 +24,7 @@ const locations = [
     bathrooms: 3,
     walkability: 35,
     safety: 55,
-    price: 2800,
+    price: '$2800',
   },
   {
     address: '3995 Mahaila Ave',
@@ -33,7 +32,7 @@ const locations = [
     bathrooms: 1,
     walkability: 65,
     safety: 65,
-    price: 1900,
+    price: '$1900',
   },
 ];
 

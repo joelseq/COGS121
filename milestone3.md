@@ -2,8 +2,6 @@
 
 ## Prototype Screenshots
 
-The home screen has a search bar where users can input the location they are looking for housing at. This leads to the map page where users can view listings and adjust sorting preferences. The user also has 
-
 ### Home Screenshot
 
 > Similar to our paper prototypes, our UI skeleton contains three main pages essential to our application. The home screen has the focuses on a location search bar like in Prototype 1 and also has its minimalistic styling. This screenshot includes searching options for housing such as number of bedrooms like in Prototype 2. 

@@ -6,8 +6,6 @@ import App from './components/App';
 
 import './styles/styles.scss';
 
-import './map.js';
-
 const render = Component => {
   ReactDOM.render(
     <AppContainer>

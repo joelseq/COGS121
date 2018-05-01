@@ -1,8 +1,13 @@
 const express = require('express');
+const Zillow = require('node-zillow');
+
+const zwsid = process.env.ZILLOW_ID;
+const zillow = new Zillow(zwsid);
 
 const router = express.Router();
 
-const locations = [{
+const locations = [
+  {
     address: '4345 Nobel Dr',
     bedrooms: 3,
     bathrooms: 3,
@@ -42,6 +47,13 @@ router.get('/', (req, res) => {
 
 router.get('/locations', (req, res) => {
   res.json(locations);
+});
+
+router.get('/subregion', (req, res) => {
+  const params = req.query;
+  zillow.get('GetRegionChildren', params).then(results => {
+    res.json(results);
+  });
 });
 
 module.exports = router;

@@ -1,0 +1,38 @@
+.MainForm {
+  &__container {
+    width: 100%;
+    height: 100%;
+    padding-top: 20vh;
+
+    p {
+      color: white;
+    }
+  }
+
+  &__heading {
+    color: white;
+  }
+
+  &__form {
+    width: 75%;
+    max-width: 750px;
+    margin: 0 auto;
+
+    &__button {
+      color: white;
+      background-color: #111111;
+      border: none;
+      padding: 5px 50px;
+      margin-top: 15px;
+
+      &:hover {
+        background-color: #999999;
+      }
+      &:focus,
+      &:active,
+      &:active:focus {
+        outline: none;
+      }
+    }
+  }
+}

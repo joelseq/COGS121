@@ -18,23 +18,65 @@
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <h2>List View</h2>
-    <div><a href="/map.html">Back to Map View</a></div>
-    <div><a href="/">Back to Home</a></div>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Address</th>
-          <th>Bedrooms</th>
-          <th>Bathrooms</th>
-          <th>Walkability</th>
-          <th>Safety</th>
-          <th>Price</th>
-        </tr>
-      </thead>
+    <div id="root"></div>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+    <script type="text/babel">
+    
+    const rootElement = document.getElementById('root');
+  
+    function Header(){
+      return <h1>List View</h1>;
+    }
+
+    function MapLink(){
+      return <div><a href="/map.html">Back to Map View</a></div>;
+    }
+
+    function HomeLink(){
+      return <div><a href="/">Back to Home</a></div>;
+    }
+
+    function TableHead(){
+      return (<thead>
+                <tr>
+                  <th>Address</th>
+                  <th>Walkability</th>
+                  <th>Safety</th>
+                  <th>Price</th>
+                </tr>
+              </thead>
+    }
+
+    function Table(){
+      return (
+      <table class="table">
+        <TableHead />
       <tbody>
       </tbody>
-    </table>
+    </table>);
+    }
+  
+    function App(){
+      return (
+        <div>
+          <Header />
+          <MapLink />
+          <HomeLink />
+        </div>
+        <div>
+          <Table />
+        </div>
+      );
+    }
+
+
+    ReactDOM.render(<App />, rootElement);
+    
+    </script>
+    
+    
     <script
       src="https://code.jquery.com/jquery-2.2.4.min.js"
       integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="

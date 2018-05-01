@@ -18,71 +18,123 @@
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
+
     <div id="root"></div>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <!-- Bootstrap -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <!-- React -->
     <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <!-- React DOM -->
     <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <!-- Babel -->
     <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+
     <script type="text/babel">
-    
     const rootElement = document.getElementById('root');
-  
-    function Header(){
+
+    function Header() {
       return <h1>List View</h1>;
     }
 
-    function MapLink(){
-      return <div><a href="/map.html">Back to Map View</a></div>;
-    }
-
-    function HomeLink(){
-      return <div><a href="/">Back to Home</a></div>;
-    }
-
-    function TableHead(){
-      return (<thead>
-                <tr>
-                  <th>Address</th>
-                  <th>Walkability</th>
-                  <th>Safety</th>
-                  <th>Price</th>
-                </tr>
-              </thead>
-    }
-
-    function Table(){
+    function MapLink() {
       return (
-      <table class="table">
-        <TableHead />
-      <tbody>
-      </tbody>
-    </table>);
+        <div>
+          <a href="/map.html">Back to Map View</a>
+        </div>
+      );
     }
-  
-    function App(){
+
+    function HomeLink() {
+      return (
+        <div>
+          <a href="/">Back to Home</a>
+        </div>
+      );
+    }
+
+    class Listings extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          error: null,
+          isLoaded: false,
+          locations: [],
+        };
+      }
+
+      componentDidMount() {
+        fetch('/api/subregion?state="wa"&county="king"&city="seattle"')
+          .then(res => res.json())
+          .then(
+            result => {
+              this.setState({
+                isLoaded: true,
+                locations: result,
+              });
+          },
+            error => {
+              this.setState({
+                isLoaded: true,
+                error,
+              });
+            },
+          );
+      }
+
+      render() {
+        const { error, isLoaded, locations } = this.state;
+        if (error) {
+          return <div>Error: {error.message}</div>;
+        } else if (!isLoaded) {
+          return <div>Loading...</div>;
+        } else {
+          return (
+            <div>
+              <h2>
+                Results for {locations.request.city.slice(1, -1)},{' '}
+                {locations.request.state.slice(1, -1)}
+              </h2>
+
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th>Zip Code</th>
+
+                    <th>Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {locations.response.list.region.map((location, i) => (
+                    <tr key={i}>
+                      <td>{location.name[0]}</td>
+                      <td>
+                        {location.zindex ? '$' + location.zindex[0]['_'] : 'Unavailable'}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          );
+        }
+      }
+    }
+
+    function App() {
       return (
         <div>
           <Header />
           <MapLink />
           <HomeLink />
-        </div>
-        <div>
-          <Table />
+          <Listings />
         </div>
       );
     }
 
-
     ReactDOM.render(<App />, rootElement);
-    
     </script>
-    
-    
-    <script
-      src="https://code.jquery.com/jquery-2.2.4.min.js"
-      integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-      crossorigin="anonymous">
-    </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-    <script src="./list.js"></script>
+
   </body>
 </html>

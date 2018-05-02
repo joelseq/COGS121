@@ -28,3 +28,6 @@ $RECYCLE.BIN/
 .DS_Store
 .Spotlight-V100
 .Trashes
+
+# Ignore package-lock to avoid Heroku conflict
+package-lock.json

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
 import axios from 'axios';
+import { withRouter } from 'react-router-dom';
+import ReactRouterPropTypes from 'react-router-prop-types';
 
 import 'react-select/dist/react-select.css';
 
@@ -11,6 +13,10 @@ import './MainForm.scss';
 import stateCodes from './states.json';
 
 class MainForm extends Component {
+  static propTypes = {
+    history: ReactRouterPropTypes.history.isRequired,
+  };
+
   state = {
     state: '',
     county: '',
@@ -58,19 +64,14 @@ class MainForm extends Component {
           });
         });
     } else {
-      axios
-        .get(
-          `/api/subregion?state=${state.value}&county=${county.value}&city=${
-            city.value
-          }`,
-        )
-        .then(res => {
-          this.setState({
-            selectedCity: true,
-            loading: false,
-            selectedCityZips: res.data.response.list.region,
-          });
-        });
+      // If reached this block, it means that the state, county, and city have all
+      // been selected so redirect the user to the listings route which loads the
+      // Listings component and fetches the zipcodes
+      this.props.history.push(
+        `/listings?state=${state.value}&county=${county.value}&city=${
+          city.value
+        }`,
+      );
     }
   };
 
@@ -151,7 +152,13 @@ class MainForm extends Component {
   };
 
   render() {
-    const { loading, error } = this.state; // eslint-disable-line
+    const {
+      loading,
+      selectedState,
+      selectedCounty,
+      state,
+      county,
+    } = this.state; // eslint-disable-line
 
     return (
       <div className="MainForm__container">
@@ -162,6 +169,14 @@ class MainForm extends Component {
           Find housing price estimates for a particular region
         </p>
         <div className="MainForm__form">
+          {selectedState && (
+            <p className="MainForm__selected">Selected State: {state.value}</p>
+          )}
+          {selectedCounty && (
+            <p className="MainForm__selected">
+              Selected County: {county.value}
+            </p>
+          )}
           {loading ? <Spinner /> : this.renderFormInput()}
         </div>
       </div>
@@ -169,4 +184,4 @@ class MainForm extends Component {
   }
 }
 
-export default MainForm;
+export default withRouter(MainForm);

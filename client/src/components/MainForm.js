@@ -162,11 +162,11 @@ class MainForm extends Component {
 
     return (
       <div className="MainForm__container">
-        <h3 className="MainForm__heading text-center">
-          Welcome to HouseFinder
-        </h3>
+        <h1 className="MainForm__heading text-center">
+          Welcome to BUROW
+        </h1>
         <p className="text-center">
-          Find housing price estimates for a particular region
+          Dig around and find the neighbourhood that fits your needs!
         </p>
         <div className="MainForm__form">
           {selectedState && (

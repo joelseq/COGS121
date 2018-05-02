@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import queryString from 'query-string';
 import { Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 
 import Spinner from './Spinner';
 
@@ -66,8 +67,12 @@ class Listings extends React.Component {
     return (
       <div>
         <h1>List View</h1>
-        <Link to="/">Home</Link>
-        <Link to="/map">Map View</Link>
+        <Link to="/">
+          <Button bsStyle="primary">Home</Button>
+        </Link>
+        <Link to="/map">
+          <Button bsStyle="primary">Map View</Button>
+        </Link>
         <h2>
           Results for {city}, {state}
         </h2>

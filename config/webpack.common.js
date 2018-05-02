@@ -12,7 +12,6 @@ const isProd = NODE_ENV === 'production';
 module.exports = {
   entry: {
     app: ['react-hot-loader/patch', helpers.root('client/src/index.js')],
-    map: helpers.root('client/src/map.js'),
   },
 
   output: {

@@ -9,10 +9,10 @@ html {
 
 .main-form {
   margin-top: 25vh;
+}
 
-  > h2 {
-    color: white;
-  }
+.main-form h2 {
+  color: white;
 }
 
 .spinner-container {

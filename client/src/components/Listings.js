@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 import queryString from 'query-string';
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
+import { Panel } from 'react-bootstrap';
 
 import Spinner from './Spinner';
+import './Listings.scss';
 
 class Listings extends React.Component {
   // This contains the definitions of the types for the props
@@ -68,7 +70,7 @@ class Listings extends React.Component {
       return <Spinner />;
     }
     return (
-      <div>
+      <div className="container">
         <h1>List View</h1>
         <Link to="/">
           <Button bsStyle="primary">Home</Button>
@@ -80,23 +82,19 @@ class Listings extends React.Component {
           Results for {city}, {state}
         </h2>
 
-        <table className="table">
-          <thead>
-            <tr>
-              <th>Zip Code</th>
+        <div id="listing-container" className="panel-group">
+          {locations.response.list.region.map(loc => (
+            <div className="panel panel-default">
+              <div className="panel-heading">
+                <h3 className="panel-title">{loc.name[0]}</h3>
+              </div>
+              <div className="panel-body">
+                Price: {loc.zindex ? `$${loc.zindex[0]._}` : 'Unavailable'}
+              </div>
+            </div>
+          ))}
+        </div>
 
-              <th>Price</th>
-            </tr>
-          </thead>
-          <tbody>
-            {locations.response.list.region.map(loc => (
-              <tr key={loc.name[0]}>
-                <td>{loc.name[0]}</td>
-                <td>{loc.zindex ? `$${loc.zindex[0]._}` : 'Unavailable'}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
       </div>
     );
   }

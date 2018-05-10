@@ -6,7 +6,7 @@
   "author": "Joel Sequeira <joelseq96@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "cross-env NODE_ENV=production webpack -p --progress --profile --colors && node index",
+    "start": "cross-env NODE_ENV=production node index",
     "start:dev": "cross-env NODE_ENV=development nodemon index",
     "test": "cross-env NODE_ENV=test jest",
     "test:watch": "cross-env NODE_ENV=test jest --watch",

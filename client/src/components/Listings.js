@@ -36,7 +36,10 @@ class Listings extends React.Component {
     const { state, county, city } = queryString.parse(location.search);
 
     if (state && county && city) {
-      fetch(`/api/subregion?state=${state}&county=${county}&city=${city}`)
+      // The API_URL will automatically be injected by webpack depending on development
+      // or production mode.
+      // eslint-disable-next-line
+      fetch(`${API_URL}/api/subregion?state=${state}&county=${county}&city=${city}`)
         .then(res => res.json())
         .then(
           result => {

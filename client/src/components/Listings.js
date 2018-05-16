@@ -17,6 +17,24 @@ class Listings extends React.Component {
     }),
   };
 
+  handleChange(event){
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
+  }
+
+  handleSubmit(event){
+    this.setState({
+      priceFilter: true
+    });
+
+    event.preventDefault();
+  }
+
   // This contains default values for props this component needs
   static defaultProps = {
     location: {
@@ -30,7 +48,26 @@ class Listings extends React.Component {
       error: null,
       isLoaded: false,
       locations: [],
-    };
+      priceFilter: false,
+      minPrice: 0,
+      maxPrice: 999999999
+    }
+    
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  function FilterOff(props){
+    return (
+        <div className="panel panel-default">
+          <div className="panel-heading">
+            <h3 className="panel-title">{loc.name[0]}</h3>
+          </div>
+          <div className="panel-body">
+
+            Price: {loc.zindex ? `$${loc.zindex[0]._}` : 'Unavailable'}
+          </div>
+        </div>)
   }
 
   componentDidMount() {
@@ -69,6 +106,13 @@ class Listings extends React.Component {
     } else if (!isLoaded) {
       return <Spinner />;
     }
+
+    const filterOn = priceFilter ? (
+      filterOn();
+    ) : (
+      filterOff();
+    );
+
     return (
       <div className="container">
         <h1>List View</h1>
@@ -82,17 +126,34 @@ class Listings extends React.Component {
           Results for {city}, {state}
         </h2>
 
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          Min Price:
+          <input name="minPrice" type="number" minVal={this.state.minPrice} onChange={this.handleChange} />
+        </label>
+        <label>
+          Max Price:
+          <input name="maxPrice" type="number" maxVal={this.state.maxPrice} onChange={this.handleChange} />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+
         <div id="listing-container" className="panel-group">
+
+
           {locations.response.list.region.map(loc => (
             <div className="panel panel-default">
               <div className="panel-heading">
                 <h3 className="panel-title">{loc.name[0]}</h3>
               </div>
               <div className="panel-body">
+
                 Price: {loc.zindex ? `$${loc.zindex[0]._}` : 'Unavailable'}
               </div>
             </div>
           ))}
+
+
         </div>
 
       </div>

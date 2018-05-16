@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import queryString from 'query-string';
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
-import { Panel } from 'react-bootstrap';
 
 import Spinner from './Spinner';
+import MapElement from './MapElement';
 import './Listings.scss';
 
 class Listings extends React.Component {
@@ -69,6 +69,10 @@ class Listings extends React.Component {
     } else if (!isLoaded) {
       return <Spinner />;
     }
+    const { latitude, longitude } = locations.response.region;
+    const mapCenter = [parseFloat(latitude[0]), parseFloat(longitude[0])];
+    console.log(mapCenter);
+
     return (
       <div className="container">
         <h1>List View</h1>
@@ -81,20 +85,23 @@ class Listings extends React.Component {
         <h2>
           Results for {city}, {state}
         </h2>
-
-        <div id="listing-container" className="panel-group">
-          {locations.response.list.region.map(loc => (
-            <div className="panel panel-default">
-              <div className="panel-heading">
-                <h3 className="panel-title">{loc.name[0]}</h3>
-              </div>
-              <div className="panel-body">
-                Price: {loc.zindex ? `$${loc.zindex[0]._}` : 'Unavailable'}
-              </div>
+        <div className="row">
+          <div className="col-md-6">
+            <MapElement center={mapCenter} data={locations.boundaries} />
+          </div>
+          <div className="col-md-6">
+            <div id="listing-container" className="panel-group">
+              {locations.response.list.region.map(loc => (
+                <div className="panel panel-default">
+                  <div className="panel-heading">
+                    <h3 className="panel-title">{loc.name[0]}</h3>
+                  </div>
+                  <div className="panel-body">Price: {loc.zindex ? `$${loc.zindex[0]._}` : 'Unavailable'}</div>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
-
       </div>
     );
   }

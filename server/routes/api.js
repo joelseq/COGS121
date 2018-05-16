@@ -50,9 +50,17 @@ router.get('/locations', (req, res) => {
 });
 
 router.get('/subregion', (req, res) => {
-  const params = req.query;
+  const params = { ...req.query };
+  if (params.city) {
+    params.childtype = 'neighborhood';
+  }
   zillow.get('GetRegionChildren', params).then(results => {
-    res.json(results);
+    if (params.city) {
+      const boundaries = require(`./boundaries/${params.state}.json`); // eslint-disable-line
+      const ret = { ...results, boundaries };
+      return res.json(ret);
+    }
+    return res.json(results);
   });
 });
 

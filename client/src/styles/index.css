@@ -73,3 +73,14 @@ html {
 .slider-label {
   margin: 5px;
 }
+
+
+.map-container {
+  height: auto;
+  width: 100%;
+  display: inline-block;
+}
+
+.leaflet-container {
+  z-index: 0;
+}

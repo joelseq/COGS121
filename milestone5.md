@@ -22,4 +22,8 @@ We also added the neighborhood boundaries of the selected city to the Map compon
 
 ## User Action 1
 
+From the home page, search for housing prices for an area you want to live in using the Search input. Start off by entering a State followed by the County and lastly the City.
+
 ## User Action 2
+
+Sort the listings by price in either ascending or descending order using the Dropdown button at the top right of the screen.

@@ -85,17 +85,22 @@ class Listings extends React.Component {
         <h2>
           Results for {city}, {state}
         </h2>
-
-        <div id="listing-container" className="panel-group">
-          <MapElement center={mapCenter} data={locations.boundaries} />
-          {locations.response.list.region.map(loc => (
-            <div className="panel panel-default">
-              <div className="panel-heading">
-                <h3 className="panel-title">{loc.name[0]}</h3>
-              </div>
-              <div className="panel-body">Price: {loc.zindex ? `$${loc.zindex[0]._}` : 'Unavailable'}</div>
+        <div className="row">
+          <div className="col-md-6">
+            <MapElement center={mapCenter} data={locations.boundaries} />
+          </div>
+          <div className="col-md-6">
+            <div id="listing-container" className="panel-group">
+              {locations.response.list.region.map(loc => (
+                <div className="panel panel-default">
+                  <div className="panel-heading">
+                    <h3 className="panel-title">{loc.name[0]}</h3>
+                  </div>
+                  <div className="panel-body">Price: {loc.zindex ? `$${loc.zindex[0]._}` : 'Unavailable'}</div>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
       </div>
     );

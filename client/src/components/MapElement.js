@@ -6,8 +6,8 @@ const ACCESS_TOKEN = 'pk.eyJ1IjoiYW1hbmd1cHRhIiwiYSI6ImNqZzl2YnFyZzd1dmUycW1kb2R
 class MapElement extends Component {
   render() {
     const mapStyle = {
-      height: '500px',
-      width: '500px',
+      height: '350px',
+      width: '350px',
     };
     const { center, data } = this.props;
 

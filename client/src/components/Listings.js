@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import queryString from 'query-string';
 import { Link } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
-import { Panel } from 'react-bootstrap';
+import { Button, ButtonToolbar, DropdownButton, MenuItem } from 'react-bootstrap';
 
 import Spinner from './Spinner';
+import MapElement from './MapElement';
 import './Listings.scss';
 
 class Listings extends React.Component {
@@ -17,23 +17,62 @@ class Listings extends React.Component {
     }),
   };
 
+  static ascendingSortHelper(a, b) {
+    // If a doesn't have zindex, put b before it
+    if (!a.zindex) {
+      return 1;
+    }
+    // If b doesn't have zindex, put a before it
+    if (!b.zindex) {
+      return -1;
+    }
+    const aVal = parseInt(a.zindex[0]._, 10);
+    const bVal = parseInt(b.zindex[0]._, 10);
+    return aVal - bVal;
+  }
+
+  static descendingSortHelper(a, b) {
+    // If a doesn't have zindex, put b before it
+    if (!a.zindex) {
+      return 1;
+    }
+    // If b doesn't have zindex, put a before it
+    if (!b.zindex) {
+      return -1;
+    }
+    const aVal = parseInt(a.zindex[0]._, 10);
+    const bVal = parseInt(b.zindex[0]._, 10);
+    return bVal - aVal;
+  }
+
+  static minMaxFilterHelper (a, minPrice, maxPrice){
+
+    // Get price of zipcode
+    const currPrice = parseInt(a.zindex[0]._, 10);
+
+    if (currPrice > minPrice &&  currPrice < maxPrice){
+      return true;
+    }
+    return false;
+  }
+
   handleChange(event){
     const target = event.target;
-    const value = target.value;
-    const name = target.name;
-
-    this.setState({
-      [name]: value
-    });
-  }
-
+      const value = target.value;
+      const name = target.name;
+    
+      this.setState({
+        [name]: value
+      });
+    }
+    
   handleSubmit(event){
-    this.setState({
-      priceFilter: true
-    });
-
-    event.preventDefault();
-  }
+      this.setState({
+        priceFilter: true
+      });
+    
+      event.preventDefault();
+    }
 
   // This contains default values for props this component needs
   static defaultProps = {
@@ -48,27 +87,25 @@ class Listings extends React.Component {
       error: null,
       isLoaded: false,
       locations: [],
+      response: null,
       priceFilter: false,
       minPrice: 0,
-      maxPrice: 999999999
-    }
-    
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+      maxPrice: 999999999,
+    };
   }
-
-  function FilterOff(props){
+/*
+  static FilterOff(props){
     return (
-        <div className="panel panel-default">
-          <div className="panel-heading">
-            <h3 className="panel-title">{loc.name[0]}</h3>
-          </div>
-          <div className="panel-body">
-
-            Price: {loc.zindex ? `$${loc.zindex[0]._}` : 'Unavailable'}
-          </div>
-        </div>)
-  }
+      <div className="panel panel-default">
+      <div className="panel-heading">
+        <h3 className="panel-title">{loc.name[0]}</h3>
+      </div>
+      <div className="panel-body">
+        Price: {loc.zindex ? `$${loc.zindex[0]._}` : 'Unavailable'}
+      </div>
+      </div>
+      )
+  }*/
 
   componentDidMount() {
     const { location } = this.props;
@@ -84,7 +121,8 @@ class Listings extends React.Component {
           result => {
             this.setState({
               isLoaded: true,
-              locations: result,
+              response: result,
+              locations: result.response.list.region,
             });
           },
           error => {
@@ -96,9 +134,27 @@ class Listings extends React.Component {
         );
     }
   }
+/*
+  filterOn = priceFilter ? (
+      filterOn();
+    ) : (
+       filterOff();
+    );*/
+
+  sortAscending = () => {
+    this.setState({
+      locations: this.state.locations.sort(Listings.ascendingSortHelper),
+    });
+  };
+
+  sortDescending = () => {
+    this.setState({
+      locations: this.state.locations.sort(Listings.descendingSortHelper),
+    });
+  };
 
   render() {
-    const { error, isLoaded, locations } = this.state;
+    const { error, isLoaded, response, locations } = this.state;
     const { location } = this.props;
     const { state, city } = queryString.parse(location.search);
     if (error) {
@@ -106,21 +162,14 @@ class Listings extends React.Component {
     } else if (!isLoaded) {
       return <Spinner />;
     }
-
-    const filterOn = priceFilter ? (
-      filterOn();
-    ) : (
-      filterOff();
-    );
+    const { latitude, longitude } = response.response.region;
+    const mapCenter = [parseFloat(latitude[0]), parseFloat(longitude[0])];
 
     return (
       <div className="container">
-        <h1>List View</h1>
+        <h1>Listings</h1>
         <Link to="/">
           <Button bsStyle="primary">Home</Button>
-        </Link>
-        <Link to="/map">
-          <Button bsStyle="primary">Map View</Button>
         </Link>
         <h2>
           Results for {city}, {state}
@@ -135,27 +184,38 @@ class Listings extends React.Component {
           Max Price:
           <input name="maxPrice" type="number" maxVal={this.state.maxPrice} onChange={this.handleChange} />
         </label>
-        <input type="submit" value="Submit" />
-      </form>
+     <input type="submit" value="Submit" />
+   </form>
 
-        <div id="listing-container" className="panel-group">
-
-
-          {locations.response.list.region.map(loc => (
-            <div className="panel panel-default">
-              <div className="panel-heading">
-                <h3 className="panel-title">{loc.name[0]}</h3>
+        <div className="row">
+          <div className="col-md-6">
+            <MapElement center={mapCenter} data={response.boundaries} />
+          </div>
+          <div className="col-md-6">
+            <div id="listing-container" className="panel-group">
+              <div className="sort-listings">
+                <ButtonToolbar>
+                  <DropdownButton bsStyle="default" title="Sort" id="dropdown-size-large">
+                    <MenuItem eventKey="1" onClick={this.sortAscending}>
+                      Ascending
+                    </MenuItem>
+                    <MenuItem eventKey="2" onClick={this.sortDescending}>
+                      Descending
+                    </MenuItem>
+                  </DropdownButton>
+                </ButtonToolbar>
               </div>
-              <div className="panel-body">
-
-                Price: {loc.zindex ? `$${loc.zindex[0]._}` : 'Unavailable'}
-              </div>
+              {locations.map(loc => (
+                <div className="panel panel-default">
+                  <div className="panel-heading">
+                    <h3 className="panel-title">{loc.name[0]}</h3>
+                  </div>
+                  <div className="panel-body">Price: {loc.zindex ? `$${loc.zindex[0]._}` : 'Unavailable'}</div>
+                </div>
+              ))}
             </div>
-          ))}
-
-
+          </div>
         </div>
-
       </div>
     );
   }

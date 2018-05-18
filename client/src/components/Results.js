@@ -19,34 +19,6 @@ class Results extends React.Component {
     }),
   };
 
-  static ascendingSortHelper(a, b) {
-    // If a doesn't have zindex, put b before it
-    if (!a.zindex) {
-      return 1;
-    }
-    // If b doesn't have zindex, put a before it
-    if (!b.zindex) {
-      return -1;
-    }
-    const aVal = parseInt(a.zindex[0]._, 10);
-    const bVal = parseInt(b.zindex[0]._, 10);
-    return aVal - bVal;
-  }
-
-  static descendingSortHelper(a, b) {
-    // If a doesn't have zindex, put b before it
-    if (!a.zindex) {
-      return 1;
-    }
-    // If b doesn't have zindex, put a before it
-    if (!b.zindex) {
-      return -1;
-    }
-    const aVal = parseInt(a.zindex[0]._, 10);
-    const bVal = parseInt(b.zindex[0]._, 10);
-    return bVal - aVal;
-  }
-
   // This contains default values for props this component needs
   static defaultProps = {
     location: {
@@ -91,18 +63,6 @@ class Results extends React.Component {
         );
     }
   }
-
-  sortAscending = () => {
-    this.setState({
-      locations: this.state.locations.sort(Results.ascendingSortHelper),
-    });
-  };
-
-  sortDescending = () => {
-    this.setState({
-      locations: this.state.locations.sort(Results.descendingSortHelper),
-    });
-  };
 
   render() {
     const { error, isLoaded, response, locations } = this.state;

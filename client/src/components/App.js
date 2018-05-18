@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import MainForm from './MainForm';
-import Listings from './Listings';
+import Results from './Results';
 import Map from './Map';
 
 // Import App styles
@@ -12,7 +12,7 @@ const App = () => (
     <Router>
       <Switch>
         <Route exact path="/" component={MainForm} />
-        <Route path="/listings" component={Listings} />
+        <Route path="/results" component={Results} />
         <Route path="/map" component={Map} />
       </Switch>
     </Router>

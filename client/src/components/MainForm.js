@@ -69,7 +69,7 @@ class MainForm extends Component {
       // If reached this block, it means that the state, county, and city have all
       // been selected so redirect the user to the listings route which loads the
       // Listings component and fetches the zipcodes
-      this.props.history.push(`/listings?state=${state.value}&county=${county.value}&city=${city.value}`);
+      this.props.history.push(`/results?state=${state.value}&county=${county.value}&city=${city.value}`);
     }
   };
 

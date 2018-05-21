@@ -5,7 +5,7 @@ class Listings extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      locations: this.props.locations
+      locations: this.props.locations,
     };
   }
 
@@ -72,7 +72,8 @@ class Listings extends Component {
               <h3 className="panel-title">{loc.name[0]}</h3>
             </div>
             <div className="panel-body">
-              Price: {loc.zindex ? `$${loc.zindex[0]._}` : 'Unavailable'}
+              <p>Price: {loc.zindex ? `$${loc.zindex[0]._}` : 'Unavailable'}</p>
+              <p>Walkability: {loc.walkscore ? `${loc.walkscore}` : 'Unavailable'}</p>
             </div>
           </div>
         ))}

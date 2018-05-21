@@ -33,15 +33,21 @@ router.get('/subregion', async (req, res) => {
   if (params.city) {
     params.childtype = 'neighborhood';
   }
-  zillow.get('GetRegionChildren', params).then(results => {
+  zillow.get('GetRegionChildren', params).then(async results => {
     if (params.city) {
-      const getWalkScores = results.response.list.region.map(neighborhood => {
-        const key = `${params.state}-${params.county}-${params.city}-${neighborhood.name[0]}`;
-        return client.getAsync(key).then(walkscore => {
-          if (walkscore) {
-            return Promise.resolve({ ...neighborhood, walkscore });
-          }
-
+      const key = `${params.state}-${params.county}-${params.city}`;
+      const boundaries = require(`./boundaries/${params.state}.json`); // eslint-disable-line
+      try {
+        const walkScoresString = await client.getAsync(key);
+        if (walkScoresString !== null) {
+          const walkScoresMap = JSON.parse(walkScoresString);
+          const returnVal = { ...results, boundaries };
+          returnVal.response.list.region = returnVal.response.list.region.map(neighborhood => {
+            return Object.assign({}, neighborhood, { walkscore: walkScoresMap[neighborhood.name] });
+          });
+          return res.json(returnVal);
+        }
+        const getWalkScores = results.response.list.region.map(neighborhood => {
           return axios
             .get(
               `http://api.walkscore.com/score?format=json&address=${neighborhood.name[0]}&lat=${
@@ -49,23 +55,28 @@ router.get('/subregion', async (req, res) => {
               }&lon=${neighborhood.longitude[0]}&transit=1&bike=1&wsapikey=${process.env.WALKSCORE_KEY}`,
             )
             .then(response => {
-              client.set(key, response.data.walkscore, redis.print);
-              return Promise.resolve({ ...neighborhood, walkscore: response.data.walkscore });
+              return Promise.resolve({ [`${neighborhood.name}`]: response.data.walkscore });
             });
         });
-      });
 
-      return Promise.all(getWalkScores)
-        .then(neighborhoodsWithWalkScores => {
-          const boundaries = require(`./boundaries/${params.state}.json`); // eslint-disable-line
-          const returnVal = { ...results, boundaries };
-          returnVal.response.list.region = neighborhoodsWithWalkScores;
-          return res.json(returnVal);
-        })
-        .catch(err => {
-          console.log(err);
-          return res.status(500).json({ error: 'Something went wrong' });
-        });
+        return Promise.all(getWalkScores)
+          .then(walkScores => {
+            const walkScoresMap = walkScores.reduce((acc, curr) => {
+              return Object.assign({}, acc, curr);
+            }, {});
+            client.set(key, JSON.stringify(walkScoresMap), redis.print);
+            const returnVal = { ...results, boundaries };
+            returnVal.response.list.region = returnVal.response.list.region.map(neighborhood => {
+              return Object.assign({}, neighborhood, { walkscore: walkScoresMap[neighborhood.name] });
+            });
+            return res.json(returnVal);
+          })
+          .catch(() => {
+            return res.status(500).json({ error: 'Something went wrong' });
+          });
+      } catch (error) {
+        return res.status(500).json({ error: 'Something went wrong' });
+      }
     }
     return res.json(results);
   });

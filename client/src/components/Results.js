@@ -33,6 +33,8 @@ class Results extends React.Component {
       isLoaded: false,
       locations: [],
       response: null,
+      minPrice: 0,
+      maxPrice: 999999999,
     };
   }
 

@@ -9,7 +9,6 @@ import MapElement from './MapElement';
 import './Results.scss';
 import Listings from './Listings';
 
-
 class Results extends React.Component {
   // This contains the definitions of the types for the props
   // this component needs
@@ -79,7 +78,7 @@ class Results extends React.Component {
     const mapCenter = [parseFloat(latitude[0]), parseFloat(longitude[0])];
 
     return (
-      <div className="container">
+      <div className="container-fluid">
         <h1>Listings</h1>
         <Link to="/">
           <Button bsStyle="primary">Home</Button>
@@ -92,7 +91,7 @@ class Results extends React.Component {
             <MapElement center={mapCenter} data={response.boundaries} />
           </div>
           <div className="col-md-6">
-            <Listings locations={locations}/>
+            <Listings locations={locations} />
           </div>
         </div>
       </div>

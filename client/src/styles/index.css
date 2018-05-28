@@ -84,3 +84,8 @@ html {
 .leaflet-container {
   z-index: 0;
 }
+
+.listings-container {
+  height: 70vh;
+  overflow-y: scroll;
+}

@@ -86,6 +86,6 @@ html {
 }
 
 .listings-container {
-  height: 70vh;
+  height: 65vh;
   overflow-y: scroll;
 }

@@ -79,17 +79,18 @@ class Listings extends Component {
 
   render() {
     const { locations } = this.state;
+    const { currentListing } = this.props;
 
     return (
       <div className="panel-group">
         <div className="sort-listings">
           <ButtonToolbar>
-            <DropdownButton bsStyle="default" title="Sort" id="dropdown-size-large">
+            <DropdownButton bsStyle="default" title="Sort By Price" id="dropdown-size-large">
               <MenuItem eventKey="1" onClick={this.sortAscending}>
-                Ascending
+                Lowest to Highest
               </MenuItem>
               <MenuItem eventKey="2" onClick={this.sortDescending}>
-                Descending
+                Highest to Lowest
               </MenuItem>
             </DropdownButton>
           </ButtonToolbar>
@@ -106,6 +107,27 @@ class Listings extends Component {
             <input type="submit" value="Apply" />
           </form>
         </div>
+        <div className="current-listing">
+          <h3>Currently Viewing Listing:</h3>
+          {currentListing ? (
+            <div className="panel panel-default">
+              <div className="panel-heading">
+                <h3 className="panel-title">{currentListing.name[0]}</h3>
+              </div>
+              <div className="panel-body">
+                <p>Price: {currentListing.zindex ? `$${currentListing.zindex[0]._}` : `Unavailable`}</p>
+                <p>Walkability: {currentListing.walkscore ? `${currentListing.walkscore}` : 'Unavailable'}</p>
+              </div>
+            </div>
+          ) : (
+            <div className="panel panel-default">
+              <div className="panel-body">
+                <p>Hover over a neighborhood on the map</p>
+              </div>
+            </div>
+          )}
+        </div>
+        <h3>All Listings:</h3>
         <div className="listings-container">
           {locations.map(loc => (
             <div key={loc.name[0]} className="panel panel-default">

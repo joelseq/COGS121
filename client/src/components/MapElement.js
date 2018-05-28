@@ -4,6 +4,32 @@ import { Map, GeoJSON, TileLayer, Pane } from 'react-leaflet';
 const ACCESS_TOKEN = 'pk.eyJ1IjoiYW1hbmd1cHRhIiwiYSI6ImNqZzl2YnFyZzd1dmUycW1kb2RncmR1dHcifQ.6iKBun8VoyY2IUZDv7mZ9g';
 
 class MapElement extends Component {
+  onEachFeature = (feature, layer) => {
+    layer.on({
+      mouseover: e => this.highlightFeature(e, feature),
+      mouseout: this.resetHighlight,
+    });
+  };
+
+  highlightFeature = (e, feature) => {
+    const layer = e.target;
+
+    layer.setStyle({
+      weight: 5,
+      color: 'gold',
+      dashArray: '',
+      fillOpacity: 0.7,
+    });
+
+    layer.bringToFront();
+    this.props.mapHighlight(feature.properties.RegionID);
+  };
+
+  resetHighlight = e => {
+    this.geojson.resetStyle(e.target);
+    this.props.resetMapHighlight();
+  };
+
   render() {
     const { center, data } = this.props;
 
@@ -19,6 +45,7 @@ class MapElement extends Component {
               this.geojson = elem && elem.leafletElement;
             }}
             data={data}
+            onEachFeature={this.onEachFeature}
           />
         </Pane>
       </Map>

@@ -9,7 +9,6 @@ import MapElement from './MapElement';
 import './Results.scss';
 import Listings from './Listings';
 
-
 class Results extends React.Component {
   // This contains the definitions of the types for the props
   // this component needs
@@ -32,9 +31,10 @@ class Results extends React.Component {
       error: null,
       isLoaded: false,
       locations: [],
-      response: null,
+      boundaries: null,
       minPrice: 0,
       maxPrice: 999999999,
+      mapHighlightedNeighborhood: null,
     };
   }
 
@@ -50,10 +50,19 @@ class Results extends React.Component {
         .then(res => res.json())
         .then(
           result => {
+            console.log(result);
+            const {
+              boundaries,
+              response: { list, region },
+            } = result;
+            const { latitude, longitude } = region;
+
             this.setState({
               isLoaded: true,
-              response: result,
-              locations: result.response.list.region,
+              boundaries: boundaries.features.filter(region => region.properties.City === city),
+              locations: list.region,
+              latitude,
+              longitude,
             });
           },
           error => {
@@ -66,8 +75,18 @@ class Results extends React.Component {
     }
   }
 
+  mapHighlight = regionId => {
+    const mapHighlightedNeighborhood = this.state.locations.find(e => e.id[0] === regionId);
+
+    this.setState({
+      mapHighlightedNeighborhood,
+    });
+  };
+
+  resetMapHighlight = () => this.setState({ mapHighlightedNeighborhood: null });
+
   render() {
-    const { error, isLoaded, response, locations } = this.state;
+    const { error, isLoaded, boundaries, locations, latitude, longitude } = this.state;
     const { location } = this.props;
     const { state, city } = queryString.parse(location.search);
     if (error) {
@@ -75,11 +94,10 @@ class Results extends React.Component {
     } else if (!isLoaded) {
       return <Spinner />;
     }
-    const { latitude, longitude } = response.response.region;
     const mapCenter = [parseFloat(latitude[0]), parseFloat(longitude[0])];
 
     return (
-      <div className="container">
+      <div className="container-fluid">
         <h1>Listings</h1>
         <Link to="/">
           <Button bsStyle="primary">Home</Button>
@@ -89,10 +107,15 @@ class Results extends React.Component {
         </h2>
         <div className="row">
           <div className="col-md-6">
-            <MapElement center={mapCenter} data={response.boundaries} />
+            <MapElement
+              center={mapCenter}
+              data={boundaries}
+              mapHighlight={this.mapHighlight}
+              resetMapHighlight={this.resetMapHighlight}
+            />
           </div>
           <div className="col-md-6">
-            <Listings locations={locations}/>
+            <Listings locations={locations} currentListing={this.state.mapHighlightedNeighborhood} />
           </div>
         </div>
       </div>

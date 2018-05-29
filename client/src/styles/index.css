@@ -74,13 +74,18 @@ html {
   margin: 5px;
 }
 
-
-.map-container {
-  height: auto;
+.map-element {
+  height: 80vh;
+  min-height: 300px;
   width: 100%;
-  display: inline-block;
+  min-width: 300px;
 }
 
 .leaflet-container {
   z-index: 0;
+}
+
+.listings-container {
+  height: 65vh;
+  overflow-y: scroll;
 }

@@ -9,6 +9,8 @@ import 'react-select/dist/react-select.css';
 import Spinner from './Spinner';
 import './MainForm.scss';
 
+//import hillsImage from '../images/hills.svg';
+
 // Import states data
 import stateCodes from './states.json';
 
@@ -87,8 +89,9 @@ class MainForm extends Component {
     if (!selectedState) {
       return (
         <React.Fragment>
-          <label htmlFor="state-input">Enter State: </label>
           <Select
+            className="MainForm__form__select"
+            placeholder="Enter a State"
             value={state}
             onChange={val => this.handleChange(val, 'state')}
             options={stateCodes.map(st => ({
@@ -96,7 +99,7 @@ class MainForm extends Component {
               label: st.name,
             }))}
           />
-          <button className="MainForm__form__button" onClick={() => this.handleSelect('state')}>
+          <button className="MainForm__form__button caps" onClick={() => this.handleSelect('state')}>
             Select
           </button>
         </React.Fragment>
@@ -104,8 +107,9 @@ class MainForm extends Component {
     } else if (!selectedCounty) {
       return (
         <React.Fragment>
-          <label htmlFor="county-input">Enter County: </label>
           <Select
+            className="MainForm__form__select"
+            placeholder="Enter a County"
             value={county}
             onChange={val => this.handleChange(val, 'county')}
             options={selectedStateCounties.map(elem => ({
@@ -113,7 +117,7 @@ class MainForm extends Component {
               label: elem.name[0],
             }))}
           />
-          <button className="MainForm__form__button" onClick={() => this.handleSelect('county')}>
+          <button className="MainForm__form__button caps" onClick={() => this.handleSelect('county')}>
             Select
           </button>
         </React.Fragment>
@@ -121,8 +125,9 @@ class MainForm extends Component {
     }
     return (
       <React.Fragment>
-        <label htmlFor="city-input">Enter City: </label>
         <Select
+          className="MainForm__form__select"
+          placeholder="Enter a City"
           value={city}
           onChange={val => this.handleChange(val, 'city')}
           options={selectedCountyCities.map(elem => ({
@@ -130,7 +135,7 @@ class MainForm extends Component {
             label: elem.name[0],
           }))}
         />
-        <button className="MainForm__form__button" onClick={() => this.handleSelect('city')}>
+        <button className="MainForm__form__button caps" onClick={() => this.handleSelect('city')}>
           Select
         </button>
       </React.Fragment>
@@ -142,12 +147,22 @@ class MainForm extends Component {
 
     return (
       <div className="MainForm__container">
-        <h1 className="MainForm__heading text-center">Welcome to BUROW</h1>
-        <p className="text-center">Dig around and find the neighbourhood that fits your needs!</p>
+        <h1 className="MainForm__heading text-center">Burow</h1>
+        <p className="MainForm__subhead text-center">Dig around and find the neighbourhood that fits your needs!</p>
         <div className="MainForm__form">
-          {selectedState && <p className="MainForm__selected">Selected State: {state.value}</p>}
-          {selectedCounty && <p className="MainForm__selected">Selected County: {county.value}</p>}
+          <div className="MainForm__form__holes">
+            <img src="/images/hole.svg" alt=""/>
+            <img src="/images/path.svg" alt=""/>
+            <img src="/images/hole.svg" alt=""/>
+            <img src="/images/path.svg" alt=""/>
+            <img src="/images/hole.svg" alt=""/>
+          </div>
+          {selectedState && <p className="MainForm__selected caps">{state.value}</p>}
+          {selectedCounty && <p className="MainForm__selected caps">{county.value}</p>}
           {loading ? <Spinner /> : this.renderFormInput()}
+        </div>
+        <div className="MainForm__hills">
+          <img src="/images/hills.svg" alt=""/>
         </div>
       </div>
     );

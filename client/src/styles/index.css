@@ -4,6 +4,38 @@ html {
   height: 100%;
   margin: 0;
   padding: 0;
+  background-color: #FFFAED;
+  -webkit-font-smoothing: antialiased;
+  font-family: 'Karla';
+  letter-spacing: -0.5px;
+}
+
+@font-face {
+    font-family: 'Aqua Grotesque';
+    src: url('../fonts/aqua-webfont.woff2') format('woff2'),
+         url('../fonts/aqua-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #5D5551;
+}
+
+h1 {
+  font-family: 'Aqua Grotesque';
+  text-transform: lowercase;
+  font-size: 42px;
+}
+
+p {
+  font-size: 16px;
+}
+
+.caps {
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-size: 12px;
 }
 
 .main-form {
@@ -15,12 +47,11 @@ html {
 }
 
 .spinner-container {
-  width: 100px;
-  height: 100px;
-  margin-top: 25%;
-  margin-right: auto;
-  margin-left: auto;
-  color: black;
+  padding-top: 10px;
+  color: #FEA765;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .menu {

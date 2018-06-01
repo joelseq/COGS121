@@ -12,8 +12,6 @@ if (isDev) {
   require('dotenv').config(); // eslint-disable-line
 }
 
-console.log(process.env.REDIS_URL);
-
 const app = express();
 app.use(helmet());
 app.use(compression());

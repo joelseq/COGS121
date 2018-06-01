@@ -7,6 +7,8 @@ import { Button } from 'react-bootstrap';
 import Spinner from './Spinner';
 import MapElement from './MapElement';
 import './Results.scss';
+import './Map.scss';
+import './Listings.scss';
 import Listings from './Listings';
 
 class Results extends React.Component {
@@ -98,27 +100,23 @@ class Results extends React.Component {
 
     return (
       <div className="container-fluid">
-        <h1>Listings</h1>
-        <Link to="/">
-          <Button bsStyle="primary">Home</Button>
-        </Link>
-        <h2>
-          Results for {city}, {state}
-        </h2>
-        <div className="row">
-          <div className="col-md-6">
+        
+        <div className="headerContainer">
+          <a href='/'><h1>burow</h1></a>
+        </div>
+       
+        <div className="mapContainer">
             <MapElement
               center={mapCenter}
               data={boundaries}
               mapHighlight={this.mapHighlight}
               resetMapHighlight={this.resetMapHighlight}
             />
-          </div>
-          <div className="col-md-6">
-            <Listings locations={locations} currentListing={this.state.mapHighlightedNeighborhood} />
-          </div>
         </div>
+      
+        <Listings locations={locations} currentListing={this.state.mapHighlightedNeighborhood} />
       </div>
+ 
     );
   }
 }

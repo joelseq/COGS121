@@ -1,0 +1,132 @@
+.active{
+    &__container{
+        background-color: #E89556;
+        border-radius: 10px;
+    }
+
+    &__cardContainer{
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    &__card{
+        background-color: #F6A05E;
+        border-width: 0;
+        color: #fefefe;
+        margin: auto;
+        width: 95%;
+    }
+
+    &__cardHeading{
+        background-color: #F6A05E;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+        padding: 10px 15px;
+    }
+
+}
+
+.listings{
+    &__container{
+        background-color: #7CA18E;
+        border-radius: 10px;
+        margin-top: 10px;
+    }
+
+    &__cardsContainer{
+        height: 32vw; /* Listings height */
+        min-height: 370px;
+        overflow-y: auto;
+        padding-top: 8px;
+    }
+
+    &__card{
+        background-color: #8EB7A2;
+        border-width: 0; 
+        color: #eee;
+        margin: auto;
+        width: 93.5%;
+    }
+
+    &__cardHeading{
+        background-color: #8EB7A2;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+        padding: 10px 15px;
+    }
+
+    &__filterButton{
+        background-color: #A6C5B5;
+        color: #3E3E3E;
+        border-width: 0;
+    }
+
+    &__filterButtonContainer{
+        margin-left: 1vw;
+        margin-top: 2px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        position: relative;
+    }
+
+}
+
+.sidebarContainer{
+    margin-left: 61vw;
+    width: 34vw;
+}
+
+.mapFilter{
+    background-color: #7CA18E;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    color: #3E3E3E;
+    height: 47px;
+    position: fixed;
+    width: 60vw;
+    z-index: 5;
+
+    &__ButtonContainer{
+        margin-left: 1vw;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        position: relative;
+    }
+
+    &__filterButton{
+        background-color: #A6C5B5;
+        border-width: 0;
+    }
+
+    &__dropContainer{
+        background-color: #A6C5B5;
+    }
+
+    &__inBarContainer{
+        border-radius: 10px;
+    }
+
+    &__formContainer{
+        padding-top: 10px;
+        padding-left: 10px;
+    }
+
+    &__fieldLabel{
+        margin-left: 7px;
+    }
+
+    &__field{
+        background-color: #A6C5B5;
+        border-width: 0;
+        border-radius: 10px;
+        margin-left: 5px;
+    }
+
+    &__applyButton{
+        background-color: #8EB7A2;
+        border-width: 0px;
+        border-radius: 10px;
+        color: #3E3E3E;
+        margin-left: 7px;
+    }
+}

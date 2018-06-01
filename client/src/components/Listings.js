@@ -83,63 +83,85 @@ class Listings extends Component {
 
     return (
       <div className="panel-group">
-        <div className="sort-listings">
-          <ButtonToolbar>
-            <DropdownButton bsStyle="default" title="Sort By Price" id="dropdown-size-large">
-              <MenuItem eventKey="1" onClick={this.sortAscending}>
-                Lowest to Highest
-              </MenuItem>
-              <MenuItem eventKey="2" onClick={this.sortDescending}>
-                Highest to Lowest
-              </MenuItem>
-            </DropdownButton>
-          </ButtonToolbar>
+        
+      
+          <div className="mapFilter">
+            <div className="mapFilter__inBarContainer">
+                  <div className="mapFilter__formContainer">
+                      <form onSubmit={this.handleSubmit}>
+                        <label>
+                          Min Price:
+                          <input className="mapFilter__field" name="minPrice" type="number" value={this.state.minPrice} onChange={this.handleChange} />
+                        </label>
+                        <label className="mapFilter__fieldLabel">
+                          Max Price:
+                          <input className="mapFilter__field" name="maxPrice" type="number" value={this.state.maxPrice} onChange={this.handleChange} />
+                        </label>
+                        <input className="mapFilter__applyButton" type="submit" value="Apply" />
+                      </form>
+                  </div>
+            </div>
+          </div>
+        
 
-          <form onSubmit={this.handleSubmit}>
-            <label>
-              Min Price:
-              <input name="minPrice" type="number" value={this.state.minPrice} onChange={this.handleChange} />
-            </label>
-            <label>
-              Max Price:
-              <input name="maxPrice" type="number" value={this.state.maxPrice} onChange={this.handleChange} />
-            </label>
-            <input type="submit" value="Apply" />
-          </form>
-        </div>
-        <div className="current-listing">
-          <h3>Currently Viewing Listing:</h3>
-          {currentListing ? (
-            <div className="panel panel-default">
-              <div className="panel-heading">
-                <h3 className="panel-title">{currentListing.name[0]}</h3>
-              </div>
-              <div className="panel-body">
-                <p>Price: {currentListing.zindex ? `$${currentListing.zindex[0]._}` : `Unavailable`}</p>
-                <p>Walkability: {currentListing.walkscore ? `${currentListing.walkscore}` : 'Unavailable'}</p>
-              </div>
+        <div className="sidebarContainer">
+          <div className="active__container">
+    
+            <div className="">
+              {currentListing ? (
+                <div className="active__cardContainer">
+                  <div className="active__card panel panel-default">
+                    <div className="active__cardHeading">
+                      <h3 className="panel-title">{currentListing.name[0]}</h3>
+                    </div>
+                    <div className="panel-body">
+                      <p>Price: {currentListing.zindex ? `$${currentListing.zindex[0]._}` : `Unavailable`}</p>
+                      <p>Walkability: {currentListing.walkscore ? `${currentListing.walkscore}` : 'Unavailable'}</p>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className="active__cardContainer">
+                  <div className="active__card panel panel-default">
+                    <div className="panel-body">
+                      <p>Hover over a neighborhood on the map</p>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
-          ) : (
-            <div className="panel panel-default">
-              <div className="panel-body">
-                <p>Hover over a neighborhood on the map</p>
-              </div>
+          </div>
+    
+          <div className="listings__container">
+        
+            <div className="listings__filterButtonContainer">
+              <ButtonToolbar>
+                <DropdownButton className="listings__filterButton" bsStyle="default" title="Sort By Price" id="dropdown-size-large">
+                  <MenuItem eventKey="1" onClick={this.sortAscending}>
+                    Lowest to Highest
+                  </MenuItem>
+                  <MenuItem eventKey="2" onClick={this.sortDescending}>
+                    Highest to Lowest
+                  </MenuItem>
+                </DropdownButton>
+              </ButtonToolbar>
             </div>
-          )}
-        </div>
-        <h3>All Listings:</h3>
-        <div className="listings-container">
-          {locations.map(loc => (
-            <div key={loc.name[0]} className="panel panel-default">
-              <div className="panel-heading">
-                <h3 className="panel-title">{loc.name[0]}</h3>
+
+            <div className="listings__cardsContainer">
+            {locations.map(loc => (
+              <div key={loc.name[0]} className="listings__card panel panel-default">
+                <div className="listings__cardHeading">
+                  <h3 className="panel-title">{loc.name[0]}</h3>
+                </div>
+                <div className="panel-body">
+                  <p>Price: {loc.zindex ? `$${loc.zindex[0]._}` : 'Unavailable'}</p>
+                  <p>Walkability: {loc.walkscore ? `${loc.walkscore}` : 'Unavailable'}</p>
+                </div>
               </div>
-              <div className="panel-body">
-                <p>Price: {loc.zindex ? `$${loc.zindex[0]._}` : 'Unavailable'}</p>
-                <p>Walkability: {loc.walkscore ? `${loc.walkscore}` : 'Unavailable'}</p>
-              </div>
+            ))}
             </div>
-          ))}
+
+          </div>
         </div>
       </div>
     );

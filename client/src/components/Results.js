@@ -61,7 +61,7 @@ class Results extends React.Component {
 
             this.setState({
               isLoaded: true,
-              boundaries: boundaries.features.filter(region => region.properties.City === city),
+              boundaries,
               locations: list.region,
               latitude,
               longitude,

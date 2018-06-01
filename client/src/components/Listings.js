@@ -83,30 +83,38 @@ class Listings extends Component {
 
     return (
       <div className="panel-group">
-        
-      
-          <div className="mapFilter">
-            <div className="mapFilter__inBarContainer">
-                  <div className="mapFilter__formContainer">
-                      <form onSubmit={this.handleSubmit}>
-                        <label>
-                          Min Price:
-                          <input className="mapFilter__field" name="minPrice" type="number" value={this.state.minPrice} onChange={this.handleChange} />
-                        </label>
-                        <label className="mapFilter__fieldLabel">
-                          Max Price:
-                          <input className="mapFilter__field" name="maxPrice" type="number" value={this.state.maxPrice} onChange={this.handleChange} />
-                        </label>
-                        <input className="mapFilter__applyButton" type="submit" value="Apply" />
-                      </form>
-                  </div>
+        <div className="mapFilter">
+          <div className="mapFilter__inBarContainer">
+            <div className="mapFilter__formContainer">
+              <form onSubmit={this.handleSubmit}>
+                <label>
+                  Min Price:
+                  <input
+                    className="mapFilter__field"
+                    name="minPrice"
+                    type="number"
+                    value={this.state.minPrice}
+                    onChange={this.handleChange}
+                  />
+                </label>
+                <label className="mapFilter__fieldLabel">
+                  Max Price:
+                  <input
+                    className="mapFilter__field"
+                    name="maxPrice"
+                    type="number"
+                    value={this.state.maxPrice}
+                    onChange={this.handleChange}
+                  />
+                </label>
+                <input className="mapFilter__applyButton" type="submit" value="Apply" />
+              </form>
             </div>
           </div>
-        
+        </div>
 
         <div className="sidebarContainer">
           <div className="active__container">
-    
             <div className="">
               {currentListing ? (
                 <div className="active__cardContainer">
@@ -117,6 +125,10 @@ class Listings extends Component {
                     <div className="panel-body">
                       <p>Price: {currentListing.zindex ? `$${currentListing.zindex[0]._}` : `Unavailable`}</p>
                       <p>Walkability: {currentListing.walkscore ? `${currentListing.walkscore}` : 'Unavailable'}</p>
+                      <p>
+                        Avg. School Rating:{' '}
+                        {currentListing.schoolscore ? `${currentListing.schoolscore}` : 'Unavailable'}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -131,12 +143,16 @@ class Listings extends Component {
               )}
             </div>
           </div>
-    
+
           <div className="listings__container">
-        
             <div className="listings__filterButtonContainer">
               <ButtonToolbar>
-                <DropdownButton className="listings__filterButton" bsStyle="default" title="Sort By Price" id="dropdown-size-large">
+                <DropdownButton
+                  className="listings__filterButton"
+                  bsStyle="default"
+                  title="Sort By Price"
+                  id="dropdown-size-large"
+                >
                   <MenuItem eventKey="1" onClick={this.sortAscending}>
                     Lowest to Highest
                   </MenuItem>
@@ -148,19 +164,19 @@ class Listings extends Component {
             </div>
 
             <div className="listings__cardsContainer">
-            {locations.map(loc => (
-              <div key={loc.name[0]} className="listings__card panel panel-default">
-                <div className="listings__cardHeading">
-                  <h3 className="panel-title">{loc.name[0]}</h3>
+              {locations.map(loc => (
+                <div key={loc.name[0]} className="listings__card panel panel-default">
+                  <div className="listings__cardHeading">
+                    <h3 className="panel-title">{loc.name[0]}</h3>
+                  </div>
+                  <div className="panel-body">
+                    <p>Price: {loc.zindex ? `$${loc.zindex[0]._}` : 'Unavailable'}</p>
+                    <p>Walkability: {loc.walkscore ? `${loc.walkscore}` : 'Unavailable'}</p>
+                    <p>Avg. School Rating: {loc.schoolscore ? `${loc.schoolscore}` : 'Unavailable'}</p>
+                  </div>
                 </div>
-                <div className="panel-body">
-                  <p>Price: {loc.zindex ? `$${loc.zindex[0]._}` : 'Unavailable'}</p>
-                  <p>Walkability: {loc.walkscore ? `${loc.walkscore}` : 'Unavailable'}</p>
-                </div>
-              </div>
-            ))}
+              ))}
             </div>
-
           </div>
         </div>
       </div>

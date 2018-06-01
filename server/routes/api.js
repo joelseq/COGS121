@@ -55,8 +55,12 @@ const getSchoolScores = (neighborhoods, state) => {
         }&lon=${longitude[0]}&radius=2&schoolType=public-charter`,
       )
       .then(response => {
+        let avgScore = null;
         // Get the average score from all the Great School ratings
-        const avgScore = getAvgScore(response.data.schools.school.map(school => school.gsRating));
+        const { schools } = response.data;
+        if (schools && schools.school && Array.isArray(schools.school)) {
+          avgScore = getAvgScore(schools.school.map(school => school.gsRating));
+        }
         return Promise.resolve({
           neighborhood: neighborhood.name,
           schoolscore: avgScore,
@@ -77,7 +81,9 @@ router.get('/subregion', async (req, res) => {
   zillow.get('GetRegionChildren', params).then(async results => {
     if (params.city) {
       const key = `${params.state}-${params.county}-${params.city}`;
-      const boundaries = require(`./boundaries/${params.state}.json`); // eslint-disable-line
+      let boundaries = require(`./boundaries/${params.state}.json`); // eslint-disable-line
+      // Filter out boundaries that are not part of the city
+      boundaries = boundaries.features.filter(region => region.properties.City === params.city);
       try {
         const scoresString = await client.getAsync(key);
         if (scoresString !== null) {

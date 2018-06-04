@@ -104,8 +104,11 @@ class Results extends React.Component {
         <div className="headerContainer">
           <div className="titleContainer">
             <a href='/'><h1>burow</h1></a>
+            <img className="titleContainer__hole" src='/images/hole.svg'/>
+            <img className="titleContainer__chipmunk" src='/images/chipmunk.svg'/>
           </div>
 
+          
           <div className="locationContainer">
             <h2>
               Neighbourhoods in {city}, {state}

@@ -128,13 +128,13 @@ class Listings extends Component {
                         <h5>Price</h5>
                       </div>
                       <div className="active__cardInfo">
-                        <h4>{currentListing.walkscore ? `${currentListing.walkscore}` : 'Unavailable'}</h4>
+                        <h4>{currentListing.walkscore ? `${currentListing.walkscore}/100` : 'Unavailable'}</h4>
                         <h5>Walkability</h5>
                       </div>
                       <div className="active__cardInfo">
                         <h4>
                           {' '}
-                          {currentListing.schoolscore ? `${currentListing.schoolscore}` : 'Unavailable'}
+                          {currentListing.schoolscore ? `${currentListing.schoolscore}/10` : 'Unavailable'}
                         </h4>
                         <h5>School Rating</h5>
               
@@ -185,11 +185,11 @@ class Listings extends Component {
                     <h5>Price</h5>
                   </div>
                   <div className="listings__cardInfo">
-                    <h4>{loc.walkscore ? `${loc.walkscore}` : 'Unavailable'}</h4>
+                    <h4>{loc.walkscore ? `${loc.walkscore}/100` : 'Unavailable'}</h4>
                     <h5>Walkability</h5>
                   </div>
                   <div className="listings__cardInfo">
-                    <h4>{loc.schoolscore ? `${loc.schoolscore}` : 'Unavailable'}</h4>
+                    <h4>{loc.schoolscore ? `${loc.schoolscore}/10` : 'Unavailable'}</h4>
                     <h5>School Rating</h5>
                   </div>
                   </div>

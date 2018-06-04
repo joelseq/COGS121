@@ -10,8 +10,9 @@ html {
   letter-spacing: -0.5px;
 }
 
-.headerContainer {
+.titleContainer {
     width: 100px;
+    padding-right: 0;
 
     h1{
         font-size: 84px;
@@ -20,4 +21,14 @@ html {
     a{
         text-decoration: none;
     }
+}
+
+.locationContainer{
+    text-align: right;
+    margin-top: -71px;
+    margin-right: 1.5vw;
+}
+
+.headerContainer{
+    
 }

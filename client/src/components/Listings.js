@@ -120,15 +120,25 @@ class Listings extends Component {
                 <div className="active__cardContainer">
                   <div className="active__card panel panel-default">
                     <div className="active__cardHeading">
-                      <h3 className="panel-title">{currentListing.name[0]}</h3>
+                      <h2 className="panel-title">{currentListing.name[0]}</h2>
                     </div>
                     <div className="panel-body">
-                      <p>Price: {currentListing.zindex ? `$${currentListing.zindex[0]._}` : `Unavailable`}</p>
-                      <p>Walkability: {currentListing.walkscore ? `${currentListing.walkscore}` : 'Unavailable'}</p>
-                      <p>
-                        Avg. School Rating:{' '}
-                        {currentListing.schoolscore ? `${currentListing.schoolscore}` : 'Unavailable'}
-                      </p>
+                      <div className="active__cardInfo">
+                        <h4>{currentListing.zindex ? `$${currentListing.zindex[0]._}` : `Unavailable`}</h4>
+                        <h5>Price</h5>
+                      </div>
+                      <div className="active__cardInfo">
+                        <h4>{currentListing.walkscore ? `${currentListing.walkscore}` : 'Unavailable'}</h4>
+                        <h5>Walkability</h5>
+                      </div>
+                      <div className="active__cardInfo">
+                        <h4>
+                          {' '}
+                          {currentListing.schoolscore ? `${currentListing.schoolscore}` : 'Unavailable'}
+                        </h4>
+                        <h5>School Rating</h5>
+              
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -167,12 +177,21 @@ class Listings extends Component {
               {locations.map(loc => (
                 <div key={loc.name[0]} className="listings__card panel panel-default">
                   <div className="listings__cardHeading">
-                    <h3 className="panel-title">{loc.name[0]}</h3>
+                    <h2 className="panel-title">{loc.name[0]}</h2>
                   </div>
                   <div className="panel-body">
-                    <p>Price: {loc.zindex ? `$${loc.zindex[0]._}` : 'Unavailable'}</p>
-                    <p>Walkability: {loc.walkscore ? `${loc.walkscore}` : 'Unavailable'}</p>
-                    <p>Avg. School Rating: {loc.schoolscore ? `${loc.schoolscore}` : 'Unavailable'}</p>
+                  <div className="listings__cardInfo">
+                    <h4>{loc.zindex ? `$${loc.zindex[0]._}` : 'Unavailable'}</h4>
+                    <h5>Price</h5>
+                  </div>
+                  <div className="listings__cardInfo">
+                    <h4>{loc.walkscore ? `${loc.walkscore}` : 'Unavailable'}</h4>
+                    <h5>Walkability</h5>
+                  </div>
+                  <div className="listings__cardInfo">
+                    <h4>{loc.schoolscore ? `${loc.schoolscore}` : 'Unavailable'}</h4>
+                    <h5>School Rating</h5>
+                  </div>
                   </div>
                 </div>
               ))}

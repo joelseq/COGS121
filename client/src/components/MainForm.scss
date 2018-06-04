@@ -47,10 +47,34 @@ $cream: #FFFAED;
       width: 100%;
       display: flex;
       justify-content: space-around;
-      padding: 10px 34px;
+      padding-left: 34px;
+      padding-right: 34px;
+      padding-bottom: 10px;
+      padding-top: 50px;
       img {
         width: 80%;
       }
+    }
+    &__stateChipmunk{
+      position: relative;
+      width: 68px;
+      margin-bottom: -60px;
+      top: -78px;
+      left: 51px;
+    }
+    &__countyChipmunk{
+      position: relative;
+      width: 68px;
+      margin-bottom: -80px;
+      top: -105px;
+      left: 199px;
+    }
+    &__cityChipmunk{
+      position: relative;
+      width: 68px;
+      margin-bottom: -80px;
+      top: -105px;
+      left: 347px;
     }
     &__select {
       padding: 20px 0 0;

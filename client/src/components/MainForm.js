@@ -90,6 +90,8 @@ class MainForm extends Component {
       return (
         
         <React.Fragment>
+        
+
           <div className="MainForm__form__stateChipmunk">
             <img src="/images/chipmunk.svg" alt=""/>
           </div>

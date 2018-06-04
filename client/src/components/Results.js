@@ -102,7 +102,15 @@ class Results extends React.Component {
       <div className="container-fluid">
         
         <div className="headerContainer">
-          <a href='/'><h1>burow</h1></a>
+          <div className="titleContainer">
+            <a href='/'><h1>burow</h1></a>
+          </div>
+
+          <div className="locationContainer">
+            <h2>
+              Neighbourhoods in {city}, {state}
+            </h2>
+          </div>
         </div>
        
         <div className="mapContainer">

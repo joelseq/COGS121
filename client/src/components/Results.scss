@@ -21,6 +21,18 @@ html {
     a{
         text-decoration: none;
     }
+
+    &__hole{
+        position: fixed;
+        top: 72px;
+        left: 310px;
+    }
+
+    &__chipmunk{
+        position: fixed;
+        top: 21px;
+        left: 328px;
+    }
 }
 
 .locationContainer{

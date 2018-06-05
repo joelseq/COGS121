@@ -88,7 +88,13 @@ class MainForm extends Component {
 
     if (!selectedState) {
       return (
+        
         <React.Fragment>
+        
+
+          <div className="MainForm__form__stateChipmunk">
+            <img src="/images/chipmunk.svg" alt=""/>
+          </div>
           <Select
             className="MainForm__form__select"
             placeholder="Enter a State"
@@ -99,14 +105,20 @@ class MainForm extends Component {
               label: st.name,
             }))}
           />
+          
           <button className="MainForm__form__button caps" onClick={() => this.handleSelect('state')}>
             Select
           </button>
+          
         </React.Fragment>
+      
       );
     } else if (!selectedCounty) {
       return (
         <React.Fragment>
+          <div className="MainForm__form__countyChipmunk">
+            <img src="/images/chipmunk.svg" alt=""/>
+          </div>
           <Select
             className="MainForm__form__select"
             placeholder="Enter a County"
@@ -117,14 +129,19 @@ class MainForm extends Component {
               label: elem.name[0],
             }))}
           />
+        
           <button className="MainForm__form__button caps" onClick={() => this.handleSelect('county')}>
             Select
           </button>
+         
         </React.Fragment>
       );
     }
     return (
       <React.Fragment>
+        <div className="MainForm__form__cityChipmunk">
+          <img src="/images/chipmunk.svg" alt=""/>
+        </div>
         <Select
           className="MainForm__form__select"
           placeholder="Enter a City"
@@ -135,6 +152,7 @@ class MainForm extends Component {
             label: elem.name[0],
           }))}
         />
+     
         <button className="MainForm__form__button caps" onClick={() => this.handleSelect('city')}>
           Select
         </button>
@@ -157,9 +175,10 @@ class MainForm extends Component {
             <img src="/images/path.svg" alt=""/>
             <img src="/images/hole.svg" alt=""/>
           </div>
+        
           {selectedState && <p className="MainForm__selected caps">{state.value}</p>}
           {selectedCounty && <p className="MainForm__selected caps">{county.value}</p>}
-          {loading ? <Spinner /> : this.renderFormInput()}
+           {loading ? <Spinner /> : this.renderFormInput()}
         </div>
         <div className="MainForm__hills">
           <img src="/images/hills.svg" alt=""/>

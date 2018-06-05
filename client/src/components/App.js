@@ -1,3 +1,9 @@
+/*
+ * Name: App.js
+ * Description: React file which renders the correct component based
+ * on the filepath.
+ */
+
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import MainForm from './MainForm';

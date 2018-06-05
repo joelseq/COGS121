@@ -1,3 +1,9 @@
+/*
+ * Name: Listings.js
+ * Description: React file that renders list (right side) of neighbourhoods
+ * in area specified by user. Also contains sorting and filter functions.
+ */
+
 import React, { Component } from 'react';
 import { ButtonToolbar, DropdownButton, MenuItem } from 'react-bootstrap';
 
@@ -137,7 +143,7 @@ class Listings extends Component {
                           {currentListing.schoolscore ? `${currentListing.schoolscore}/10` : 'Unavailable'}
                         </h4>
                         <h5>School Rating</h5>
-              
+
                       </div>
                     </div>
                   </div>

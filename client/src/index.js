@@ -1,3 +1,8 @@
+/*
+ * Name: index.js
+ * Description: Index file for react which renders at the root level.
+ */
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './styles/index.css';

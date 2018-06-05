@@ -4,8 +4,6 @@ import MainForm from './MainForm';
 import Results from './Results';
 import Map from './Map';
 
-// Import App styles
-import './App.scss';
 
 const App = () => (
   <div>

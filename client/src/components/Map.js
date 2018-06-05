@@ -1,3 +1,9 @@
+/*
+ * Name: Map.js
+ * Description: React file holding the html and js for the map on the results page. Map is 
+ *   rendered through MapBox
+ */
+
 import React from 'react';
 import mapboxgl from 'mapbox-gl/dist/mapbox-gl';
 import { Link } from 'react-router-dom';

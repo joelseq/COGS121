@@ -1,3 +1,9 @@
+/*
+ * Name: server.js
+ * Description: Express Server which starts the App. Server is set up to 
+ *   allow users to run app on development mode.
+ */
+
 const bodyParser = require('body-parser');
 const compression = require('compression');
 const express = require('express');

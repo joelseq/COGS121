@@ -1,3 +1,10 @@
+/*
+ * Name: api.js
+ * Description: Javascript file that makes 
+ *  and manages API requests. APIs linked are Zillow, Greatschools, and Walkscore.
+ *  Areas retrieved are specified by city as specified by user on form on home page.
+ */
+
 const express = require('express');
 const Zillow = require('node-zillow');
 const redis = require('redis');

@@ -61,11 +61,11 @@ https://drive.google.com/file/d/1a0_elaRO7U0osApLxUgap3Kg3ghxkchM/view?usp=shari
 					* CSS file containing base stylings for all HTML pages. Sets standard for font usage.
 * Server
   * Routes
-		* Api.js
-			* Javascript file that makes and manages API requests to Zillow, Greatschools, and Walkscore
-		* Index.js
-			* Javascript file requiring api.js when making API requests
-		* Boundaries
-			* Directory containing shapefiles that were downloaded to define and display boundaries on the map.
-	* Server.js
-		* Express Server which starts the App
+	* Api.js
+		* Javascript file that makes and manages API requests to Zillow, Greatschools, and Walkscore
+	* Index.js
+		* Javascript file requiring api.js when making API requests
+	* Boundaries
+		* Directory containing shapefiles that were downloaded to define and display boundaries on the map.
+  * Server.js
+	* Express Server which starts the App

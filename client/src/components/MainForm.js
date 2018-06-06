@@ -1,6 +1,6 @@
 /*
  * Name: MainForm.js
- * Description: React file holding the html and logic for the home page. 
+ * Description: React file holding the html and logic for the home page.
  *  Renders form on home page as user progresses through form. State of application
  *  changes as form is filled out.
  */
@@ -94,12 +94,7 @@ class MainForm extends Component {
       return (
 
         <React.Fragment>
-<<<<<<< Updated upstream
-        
-=======
 
-
->>>>>>> Stashed changes
           <div className="MainForm__form__stateChipmunk">
             <img src="/images/chipmunk.svg" alt=""/>
           </div>

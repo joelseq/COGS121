@@ -4,6 +4,7 @@
  * active hover area and scrollable list.
  */
 
+// Active card styles
 .active{
     &__container{
         background-color: #E89556;
@@ -48,6 +49,7 @@
 
 }
 
+// Listings styles
 .listings{
     &__container{
         background-color: #7CA18E;
@@ -109,11 +111,13 @@
 
 }
 
+// Sidebar styles
 .sidebarContainer{
     margin-left: 61vw;
     width: 34vw;
 }
 
+// Map filter styles
 .mapFilter{
     background-color: #7CA18E;
     border-top-left-radius: 10px;

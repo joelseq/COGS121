@@ -1,3 +1,9 @@
+/*
+ * Name: Results.js
+ * Description: React file which brings renders the map and listings
+ * components onto the same page.
+ */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import queryString from 'query-string';
@@ -87,6 +93,7 @@ class Results extends React.Component {
 
   resetMapHighlight = () => this.setState({ mapHighlightedNeighborhood: null });
 
+  // Render results page (map + listings)
   render() {
     const { error, isLoaded, boundaries, locations, latitude, longitude } = this.state;
     const { location } = this.props;
@@ -100,7 +107,7 @@ class Results extends React.Component {
 
     return (
       <div className="container-fluid">
-        
+
         <div className="headerContainer">
           <div className="titleContainer">
             <a href='/'><h1>burow</h1></a>
@@ -108,14 +115,13 @@ class Results extends React.Component {
             <img className="titleContainer__chipmunk" src='/images/chipmunk.svg'/>
           </div>
 
-          
           <div className="locationContainer">
             <h2>
               Neighbourhoods in {city}, {state}
             </h2>
           </div>
         </div>
-       
+
         <div className="mapContainer">
             <MapElement
               center={mapCenter}
@@ -124,10 +130,9 @@ class Results extends React.Component {
               resetMapHighlight={this.resetMapHighlight}
             />
         </div>
-      
+
         <Listings locations={locations} currentListing={this.state.mapHighlightedNeighborhood} />
       </div>
- 
     );
   }
 }

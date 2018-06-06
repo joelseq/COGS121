@@ -1,6 +1,6 @@
 /*
  * Name: MainForm.js
- * Description: React file holding the html and logic for the home page. 
+ * Description: React file holding the html and logic for the home page.
  *  Renders form on home page as user progresses through form. State of application
  *  changes as form is filled out.
  */
@@ -14,8 +14,6 @@ import 'react-select/dist/react-select.css';
 
 import Spinner from './Spinner';
 import './MainForm.scss';
-
-//import hillsImage from '../images/hills.svg';
 
 // Import states data
 import stateCodes from './states.json';
@@ -94,9 +92,9 @@ class MainForm extends Component {
 
     if (!selectedState) {
       return (
-        
+
         <React.Fragment>
-        
+
           <div className="MainForm__form__stateChipmunk">
             <img src="/images/chipmunk.svg" alt=""/>
           </div>
@@ -110,13 +108,13 @@ class MainForm extends Component {
               label: st.name,
             }))}
           />
-          
+
           <button className="MainForm__form__button caps" onClick={() => this.handleSelect('state')}>
             Select
           </button>
-          
+
         </React.Fragment>
-      
+
       );
     } else if (!selectedCounty) {
       return (
@@ -134,11 +132,11 @@ class MainForm extends Component {
               label: elem.name[0],
             }))}
           />
-        
+
           <button className="MainForm__form__button caps" onClick={() => this.handleSelect('county')}>
             Select
           </button>
-         
+
         </React.Fragment>
       );
     }
@@ -157,7 +155,7 @@ class MainForm extends Component {
             label: elem.name[0],
           }))}
         />
-     
+
         <button className="MainForm__form__button caps" onClick={() => this.handleSelect('city')}>
           Select
         </button>
@@ -180,7 +178,7 @@ class MainForm extends Component {
             <img src="/images/path.svg" alt=""/>
             <img src="/images/hole.svg" alt=""/>
           </div>
-        
+
           {selectedState && <p className="MainForm__selected caps">{state.value}</p>}
           {selectedCounty && <p className="MainForm__selected caps">{county.value}</p>}
            {loading ? <Spinner /> : this.renderFormInput()}

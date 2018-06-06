@@ -1,3 +1,9 @@
+/*
+ * Name: MapElement.js
+ * Description: React file holding the html and js for the outline of each
+ * neighborhood in the map.
+ */
+
 import React, { Component } from 'react';
 import { Map, GeoJSON, TileLayer, Pane } from 'react-leaflet';
 
@@ -11,6 +17,7 @@ class MapElement extends Component {
     });
   };
 
+  // Highlight region on hover
   highlightFeature = (e, feature) => {
     const layer = e.target;
 
@@ -30,6 +37,7 @@ class MapElement extends Component {
     this.props.resetMapHighlight();
   };
 
+  // Render the map regions
   render() {
     const { center, data } = this.props;
 

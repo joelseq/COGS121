@@ -1,13 +1,21 @@
 /*
  * Name: MainForm.scss
+<<<<<<< Updated upstream
  * Description: Scss file with styling for the home page. Contains stylings for user input
     form, buttons, and visual elements. Visual elements are .svg files contained in images
     directory.
+=======
+ * Description: Scss file with styling for the home page.
+>>>>>>> Stashed changes
  */
 
 $cream: #FFFAED;
 
+<<<<<<< Updated upstream
 /* MainForm styling */
+=======
+// Styles for the main form where user inputs state/city/county
+>>>>>>> Stashed changes
 .MainForm {
   &__container {
     width: 100%;

@@ -1,5 +1,13 @@
+/*
+ * Name: MainForm.scss
+ * Description: Scss file with styling for the home page. Contains stylings for user input
+    form, buttons, and visual elements. Visual elements are .svg files contained in images
+    directory.
+ */
+
 $cream: #FFFAED;
 
+/* MainForm styling */
 .MainForm {
   &__container {
     width: 100%;
@@ -23,6 +31,7 @@ $cream: #FFFAED;
     margin-top: 10px;
     color: $cream;
 
+    /* Label stylings */
     label {
       width: 100%;
     }

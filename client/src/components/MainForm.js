@@ -1,3 +1,9 @@
+/*
+ * Name: MainForm.js
+ * Description: React file holding the html and logic for the home page. 
+ *  Renders form on home page as user progresses through form. State of application
+ *  changes as form is filled out.
+ */
 import React, { Component } from 'react';
 import Select from 'react-select';
 import axios from 'axios';
@@ -91,7 +97,6 @@ class MainForm extends Component {
         
         <React.Fragment>
         
-
           <div className="MainForm__form__stateChipmunk">
             <img src="/images/chipmunk.svg" alt=""/>
           </div>
